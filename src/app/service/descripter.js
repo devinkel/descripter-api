@@ -62,11 +62,12 @@ export default class DescripterService {
                             // gera um texto usando a API OpenAI
                             const generateText = await this.openAi.generateText(this.#promptBuilder(mapedData));
 
+                            // formata o texto gerado para não ter quebras de linha
+                            mapedData['Descrição'] = generateText.replace(/\n\s*/g, ' ');
+
                             // escreve os registros no arquivo CSV de saída
                             await csvWriter.writeRecords([mapedData]);
 
-                            // formata o texto gerado para não ter quebras de linha
-                            mapedData['Descrição'] = generateText.replace(/\n\s*/g, ' ');
                         } catch (error) {
                             console.error('Error:', error);
                         }

@@ -7,6 +7,7 @@ const usersController = new userController
 
 userRoutes.get('/users', usersController.index)
 userRoutes.post('/users', usersController.store)
+userRoutes.post('/users/checkemail', usersController.checkEmail)
 userRoutes.post('/users/authenticate', usersController.authenticate)
 userRoutes.post('/users/me', authMiddleware, usersController.me)
 userRoutes.delete('/users/delete', authMiddleware, usersController.delete)

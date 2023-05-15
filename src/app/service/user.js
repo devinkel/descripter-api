@@ -40,6 +40,7 @@ export default class userService {
 
     async loginUser(req, res) {
         const email = req.decoded ? req?.decoded?.email : undefined
+        console.log(email)
         const user = await User.findOne({ email: email })
         if (!user) {
             return res.status(404).send({
@@ -72,4 +73,19 @@ export default class userService {
             });
         }
     }
+
+    async checkEmail(req, res) {
+        const emailToCheck = req.body.email;
+        const checkedEmail = await User.findOne({ email: emailToCheck }).select('email')
+
+        if (!checkedEmail) {
+            res.status(500).send({
+                code: 404,
+                message: "E-mail not found"
+            });
+        }
+
+        return res.send(checkedEmail)
+    }
+
 }

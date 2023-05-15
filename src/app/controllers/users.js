@@ -14,6 +14,10 @@ class userController {
         await UserService.createUser(req, res)
     }
 
+    async checkEmail(req, res) {
+        await UserService.checkEmail(req, res)
+    }
+
     async authenticate(req, res) {
         await UserService.authenticateUser(req, res)
     }
